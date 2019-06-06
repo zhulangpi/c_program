@@ -24,7 +24,7 @@ int create_list( struct list_node **phead , int len)
 
     ptmp = *phead;
 
-    for(i=0;i<len;i++){
+    for(i=1;i<len;i++){
         pprev = ptmp;
         ptmp = (struct list_node*)malloc(sizeof(struct list_node));
 
@@ -54,10 +54,14 @@ int print_list(struct list_node *phead)
     int i=0;
     
     while(ptmp){
+        printf("%3d", ptmp->val);
+        if(ptmp->next)
+            if(ptmp->next->prev==ptmp)
+                printf("<->");
+            else
+                printf(" ->");
 
-        printf("%3d-> ", ptmp->val);
-
-        if( 0==( ++i%10) )
+        if( 0==(++i%10) )
             printf("\n");
 
         ptmp = ptmp->next;
@@ -66,12 +70,14 @@ int print_list(struct list_node *phead)
             break;
     }
 
-    printf("\n");
+    if( 0!=( i%10) )
+        printf("\n");
     printf("list length is %d\n", i);
 
     return i;
 }
 
+//free整个链表
 int delete_list(struct list_node* phead)
 {
     int i=0;
@@ -92,20 +98,4 @@ int delete_list(struct list_node* phead)
 
     return i;
 }
-
-
-int main()
-{
-    struct list_node *phead;
-
-    create_list(&phead, 20);
-
-    print_list(phead);
-
-    printf("delete node %d\n",delete_list(phead));
-    return 0;
-}
-
-
-
 

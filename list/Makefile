@@ -1,15 +1,22 @@
 CC:=gcc
+LD:=gcc
 CFLAGS:=-g
+LDFLAGS:=
 
-SOURCES:=list.c
+LIB:=list.o
+
+%.o:%.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
 
+all:list_reverse
+	
 
-list_reverse:
-	$(CC) $(CFLAGS) $(SOURCES) list_reverse.c -o $@
+list_reverse: list_reverse.o $(LIB)
+	$(CC) $(LDFLAGS) $^ -o $@
 
 
 
 clean:
-	rm -rf *.o
+	rm -rf *.o list_reverse
 

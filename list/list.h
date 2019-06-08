@@ -9,7 +9,8 @@ struct list_node{
 };
 
 
-extern int create_list( struct list_node **phead , int len);
+extern struct list_node*create_list(int len);
+extern int break_list(struct list_node *phead);
 extern int print_list(struct list_node *phead);
 extern int delete_list(struct list_node* phead);
 

@@ -3,26 +3,26 @@
 #include <stdio.h>
 #include "list.h"
 
-//创建一个头为*phead，长度为len，每个节点val为随机的双向循环链表
-//返回创建的链表长度
-int create_list( struct list_node **phead , int len)
+//长度为len，每个节点val为随机的双向循环链表
+//返回链表头
+struct list_node* create_list( int len)
 {
     int i=0,val=0,l=0;
-    struct list_node *pprev=NULL,*ptmp=NULL;
+    struct list_node *phead=NULL, *pprev=NULL,*ptmp=NULL;
 
     if(!len)
-        return 0;
+        return NULL;
 
     srand( (unsigned int)time(NULL) );
     
-    *phead = (struct list_node*)malloc(sizeof(struct list_node));
+    phead = (struct list_node*)malloc(sizeof(struct list_node));
 
-    if(NULL==*phead)
+    if(NULL==phead)
         return 0;
 
-    (*phead)->val = rand()%1000;
+    phead->val = rand()%1000;
 
-    ptmp = *phead;
+    ptmp = phead;
 
     for(i=1;i<len;i++){
         pprev = ptmp;
@@ -41,11 +41,34 @@ int create_list( struct list_node **phead , int len)
     
     }
 
-    (*phead)->prev = ptmp;
-    ptmp->next = *phead;
+    phead->prev = ptmp;
+    ptmp->next = phead;
 
-    return l;
+    return phead;
 }
+
+//断开循环链表的头尾
+int break_list(struct list_node *phead)
+{
+    struct list_node *ptmp=NULL;
+    if(!phead)
+        return -1;
+
+    if(phead->prev)
+        phead->prev->next = NULL;
+    else{
+        ptmp = phead;
+        while(ptmp->next){
+            ptmp=ptmp->next;
+        }
+        ptmp->next=NULL;
+    }
+
+    phead->prev = NULL;
+
+    return 0;
+}
+
 
 //打印链表，返回节点数
 int print_list(struct list_node *phead)

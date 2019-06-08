@@ -1,6 +1,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "list.h"
 
 //Q:一条单向链表，反转从m到n的所有节点, 0<m<n<链表长度-1
@@ -51,11 +52,16 @@ int list_reverse(struct list_node *phead, int m, int n)
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
     struct list_node *phead=NULL;
+    int len=0;
 
-    create_list(&phead, 10);
+    if(argc>1){
+        len = atoi(argv[1]);
+    }
+
+    phead = create_list(len);
 
     print_list(phead);
 

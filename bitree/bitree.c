@@ -4,14 +4,7 @@
 #include <string.h>
 #include "bitree.h"
 
-
-//创建一个节点值随机，n个节点的完全二叉树
-//    0              i
-//    /\           /  \
-//   1  2       2*i+1 2*i+2
-//  /\  /\
-// 3 4 5  6
-void create_node(struct bitree_node* root, int index, int total)
+static void create_node(struct bitree_node* root, int index, int total)
 {
     int i = 0, left_idx = 2*index+1, right_idx = 2*index+2;
 
@@ -71,7 +64,7 @@ void delete_bitree(struct bitree_node *root)
 }
 
 //DLR 先序遍历
-void DLR_bitree(struct bitree_node* root)
+ static void DLR_bitree(struct bitree_node* root)
 {
     if(!root)
         return;
@@ -88,7 +81,7 @@ void print_DLR(struct bitree_node *root)
 }
 
 //LDR 中序遍历
-void LDR_bitree(struct bitree_node* root)
+static void LDR_bitree(struct bitree_node* root)
 {
     if(!root)
         return;
@@ -105,7 +98,7 @@ void print_LDR(struct bitree_node *root)
 }
 
 //LRD 后序遍历
-void LRD_bitree(struct bitree_node* root)
+static void LRD_bitree(struct bitree_node* root)
 {
     if(!root)
         return;
@@ -119,23 +112,5 @@ void print_LRD(struct bitree_node *root)
     printf("LRD:\n");
     LRD_bitree(root);
     printf("\n");
-}
-
-int main(int argc, char* argv[])
-{
-    struct bitree_node * root  =NULL;
-    int total=0;
-
-    if(argc>=2)
-        total = atoi(argv[1]);
-
-    root = create_bitree(total);
-
-    print_DLR(root);
-    print_LDR(root);
-    print_LRD(root);
-
-    delete_bitree(root);
-    return 0;
 }
 

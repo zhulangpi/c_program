@@ -9,7 +9,7 @@ LIB:=list.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
-all:list_reverse list_swap_pairs
+all:list_reverse list_swap_pairs list_sort
 	
 
 list_reverse: list_reverse.o $(LIB)
@@ -18,7 +18,9 @@ list_reverse: list_reverse.o $(LIB)
 list_swap_pairs: list_swap_pairs.o $(LIB)
 	$(CC) $(LDFLAGS) $^ -o $@
 
+list_sort: list_sort.o $(LIB)
+	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
-	rm -rf *.o list_reverse list_swap_pairs
+	rm -rf *.o list_reverse list_swap_pairs list_sort
 

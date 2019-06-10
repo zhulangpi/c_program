@@ -3,18 +3,18 @@ LD:=gcc
 CFLAGS:=-g
 LDFLAGS:=
 
-LIB:=bitree.o
+LIB:=
 
 %.o:%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
-all:reconstruct
+all:sort
 	
 
-reconstruct: reconstruct.o $(LIB)
+sort: sort.o $(LIB)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
-	rm -rf *.o reconstruct
+	rm -rf *.o sort
 

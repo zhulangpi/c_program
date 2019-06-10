@@ -8,7 +8,11 @@ struct bitree_node{
 
 };
 
-
+struct bitree_node* create_bitree(int n);
+void delete_bitree(struct bitree_node *root);
+void print_DLR(struct bitree_node *root);
+void print_LDR(struct bitree_node *root);
+void print_LRD(struct bitree_node *root);
 
 
 #endif

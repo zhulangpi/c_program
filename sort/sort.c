@@ -108,6 +108,45 @@ void insert_sort(int *phead, int length)
     }
 }
 
+#define swap(m, n)  ({\
+    m += n;\
+    n = m-n;\
+    m = m-n;\
+})
+
+void quick_sort(int *phead, int length)
+{
+    int i=0,j=length-1;
+    int tmp = 0;
+
+    if(!phead||length<1)
+        return;
+    //头尾相等时结束
+    while(1){
+        while( i<j &&  phead[i]<phead[j] ){
+            j--;
+        }
+        if(i==j)
+            break;
+        else{
+            swap(phead[i],phead[j]);
+        }
+        while( i<j &&  phead[i]<phead[j] ){
+            i++;
+        }
+        if(i==j)
+            break;
+        else{
+            swap(phead[i],phead[j]);
+        }
+    }
+
+    quick_sort(phead,i);
+    quick_sort(phead+i+1,length-i-1);
+
+}
+
+
 int main(int argc, char* argv[])
 {
     int *phead=NULL;
@@ -118,7 +157,7 @@ int main(int argc, char* argv[])
 
     phead = generate_sequence(len);
     print_sequence(phead,len);
-    insert_sort(phead,len);
+    quick_sort(phead,len);
     print_sequence(phead,len);
 
     delete_sequence(phead);

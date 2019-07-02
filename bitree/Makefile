@@ -9,12 +9,15 @@ LIB:=bitree.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
-all:reconstruct
+
+OUT:=reconstruct
+
+all:$(OUT)
 	
 
 reconstruct: reconstruct.o $(LIB)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
-	rm -rf *.o reconstruct
+	rm -rf *.o $(OUT)
 

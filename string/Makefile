@@ -8,8 +8,9 @@ LIB:=
 %.o:%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
+OUT:=max_same_substring
 
-all:max_same_substring
+all:$(OUT)
 	
 
 max_same_substring: max_same_substring.o $(LIB)
@@ -17,5 +18,5 @@ max_same_substring: max_same_substring.o $(LIB)
 
 
 clean:
-	rm -rf *.o max_same_substring
+	rm -rf *.o $(OUT)
 

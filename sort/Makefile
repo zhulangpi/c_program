@@ -8,13 +8,14 @@ LIB:=
 %.o:%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
+OUT:=sort
 
-all:sort
+all:$(OUT)
 	
 
 sort: sort.o $(LIB)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
-	rm -rf *.o sort
+	rm -rf *.o $(OUT)
 

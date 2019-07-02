@@ -69,6 +69,67 @@ int break_list(struct list_node *phead)
     return 0;
 }
 
+//判断链表是否有环，如果有返回入口节点，否则返回NULL
+struct list_node* list_have_hoop(struct list_node *phead, int *length)
+{
+    struct list_node *p1=phead, *p2=phead, *p3=NULL;
+    int i=0, hoop_length=0;
+
+    if(!phead)
+        return NULL;
+
+    while(p1->next && p2->next){
+        p1 = p1->next;
+        p2 = p2->next;
+        if(p2->next)
+            p2 = p2->next;
+
+        //有环，计算环的长度
+        if(p1==p2){
+            do{
+                hoop_length++;
+                p2 = p2->next;
+            }while(p2!=p1);
+            break;
+        }
+    }
+
+    if(!hoop_length)
+        return NULL;
+
+    if(length)
+        *length = hoop_length;
+
+    p1 = p2 = phead;
+    for(i=0; i<hoop_length; i++){
+        p2 = p2->next;
+    }
+
+    while(p1!=p2){
+        p1 = p1->next;
+        p2 = p2->next;
+    }
+
+    return p1;
+}
+
+int list_break_hoop(struct list_node *phead)
+{
+    struct list_node *p1=NULL, *p2=NULL;
+    if(!phead)
+        return 0;
+
+    p1 = list_have_hoop(phead, NULL);
+    if(!p1)
+        return 0;
+    p2 = p1;
+    while(p2->next!=p1){
+        p2 = p2->next;
+    };
+    p2->next = NULL;
+
+    return 1;
+}
 
 //打印链表，返回节点数
 int print_list(struct list_node *phead)
@@ -121,4 +182,5 @@ int delete_list(struct list_node* phead)
 
     return i;
 }
+
 

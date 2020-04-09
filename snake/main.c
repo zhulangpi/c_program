@@ -142,7 +142,7 @@ void* scan_input(void *arg)
     (void)arg;
     while(1){
         input = getch();
-        usleep(10*1000);
+        usleep(10);
     }
     return NULL;
 }
